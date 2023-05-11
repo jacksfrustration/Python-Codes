@@ -1,0 +1,107 @@
+import random
+import pyperclip
+import tkinter as tk
+from tkinter import messagebox
+
+def process_word_button():
+    result = ""
+    letters = ['a', 'b', 'c', 'd', 'e', 'f',
+               'g', 'h', 'i', 'j', 'k', 'l',
+               'm', 'n', 'o', 'p', 'q', 'r',
+               's', 't', 'u', 'v', 'w', 'x',
+               'y', 'z', 'a', 'b', 'c', 'd',
+               'e', 'f', 'g', 'h', 'i', 'j',
+               'k', 'l', 'm', 'n', 'o', 'p',
+               'q', 'r', 's', 't', 'u', 'v',
+               'w', 'x', 'y', 'z',' ']
+    direction = var.get()
+    text = text_entry.get()
+    for let in text:
+        if len(text)==0 or let not in letters:
+            messagebox.showerror(title="Caesar Cipher", message="Invalid word or entered characters that are not in the alphabet")
+            return None
+    if direction == "Encrypt":
+        for let in text:
+            if let == " ":
+                new_let = " "
+                result += new_let
+
+            else:
+                i = letters.index(let)
+                new_let = letters[i + 3]
+                result += new_let
+
+    elif direction == "Decrypt":
+        for let in text:
+            if let == " ":
+                new_let = " "
+                result += new_let
+
+            else:
+                i = letters.index(let) + 26
+                new_let = letters[i - 3]
+                result += new_let
+    pyperclip.copy(result)
+    messagebox.showinfo(title="Result", message=f"Your {direction}ed word is {result}")
+
+def process_word(_event):
+    result = ""
+    letters = ['a', 'b', 'c', 'd', 'e', 'f',
+               'g', 'h', 'i', 'j', 'k', 'l',
+               'm', 'n', 'o', 'p', 'q', 'r',
+               's', 't', 'u', 'v', 'w', 'x',
+               'y', 'z', 'a', 'b', 'c', 'd',
+               'e', 'f', 'g', 'h', 'i', 'j',
+               'k', 'l', 'm', 'n', 'o', 'p',
+               'q', 'r', 's', 't', 'u', 'v',
+               'w', 'x', 'y', 'z',' ']
+    direction = var.get()
+    text = text_entry.get()
+    for let in text:
+        if len(text) == 0 or let not in letters:
+            messagebox.showerror(title="Caesar Cipher",
+                                 message="Invalid word or entered characters that are not in the alphabet")
+            return None
+    if direction == "Encrypt":
+        for let in text:
+            if let == " ":
+                new_let = " "
+                result += new_let
+
+            else:
+                i = letters.index(let)
+                new_let = letters[i + 3]
+                result += new_let
+
+    elif direction == "Decrypt":
+        for let in text:
+            if let == " ":
+                new_let = " "
+                result += new_let
+
+            else:
+                i = letters.index(let) + 26
+                new_let = letters[i - 3]
+                result += new_let
+    pyperclip.copy(result)
+    messagebox.showinfo(title="Result", message=f"Your {direction}ed word is {result}")
+
+
+
+
+window=tk.Tk()
+window.title("Caesar Cipher")
+canvas=tk.Canvas (width=450,height=150)
+var=tk.StringVar(window)
+var.set("Encrypt")
+option=tk.OptionMenu(window,var, "Encrypt","Decrypt")
+option.grid(row=1,column=0)
+text_label=tk.Label(text="Insert text")
+text_label.grid(column=0,row=0)
+text_entry=tk.Entry()
+text_entry.grid(row=0,column=1)
+window.bind("<Return>",process_word)
+process_button=tk.Button(text="Process", command=process_word_button)
+process_button.grid(row=1,column=1)
+
+window.mainloop()
